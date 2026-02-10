@@ -38,7 +38,7 @@ setPage(1);
   };
 
    useEffect(() => {
-    if (isSuccess && data?.movies.length === 0){
+    if (isSuccess && data?.results.length === 0){
       toast.error('No movies found for your request.');
     }
 }, [isSuccess, data]);
@@ -47,12 +47,12 @@ setPage(1);
     <div className={css.app}>
      <Toaster />
       <SearchBar onSubmit={handleSearch} />
-      {isSuccess && data.movies.length > 0 && (
+      {isSuccess && data.results.length > 0 && (
         <>
-          <MovieGrid movies={data.movies} onSelect={handleSelectMovie} />
-          {data.totalPages > 1 && (
+          <MovieGrid movies={data.results} onSelect={handleSelectMovie} />
+          {data.total_pages > 1 && (
             <ReactPaginate
-              pageCount={data.totalPages}
+              pageCount={data.total_pages}
               pageRangeDisplayed={5}
               marginPagesDisplayed={1}
               onPageChange={({ selected }) => setPage(selected + 1)}

@@ -1,18 +1,14 @@
 import axios from 'axios';
 import type { Movie } from '../types/movie';
 
-interface tmdbResponse {
+interface TmdbResponse {
   results: Movie[];
   total_pages: number;
 }
 
-interface moviesResponce {
-  movies: Movie[];
-  totalPages: number;
-}
 
-export const fetchMovies = async (topic: string, page: number = 1): Promise<moviesResponce> => {
-  const response = await axios.get<tmdbResponse>(
+export const fetchMovies = async (topic: string, page: number = 1): Promise<TmdbResponse> => {
+  const response = await axios.get<TmdbResponse>(
     'https://api.themoviedb.org/3/search/movie',
     {
       params: {
@@ -24,8 +20,5 @@ export const fetchMovies = async (topic: string, page: number = 1): Promise<movi
       },
     },
   );
-  return {
-    movies: response.data.results,
-totalPages: response.data.total_pages,
-};
+  return response.data;
 };
